@@ -1,7 +1,9 @@
 # dotfiles
-
+```
 git clone https://github.com/llynch/dotfiles.git
 cd dotfiles
+git submodule init
+git submodule update
 git submodule foreach git pull origin master
 pip install --user dotfiles
 dotfiles --config=.dotfilesrc --sync --dry-run
@@ -10,3 +12,4 @@ ln -sf ~/.vim/.vimrc ~/.vimrc
 vim -c PluginInstall -c qa
 
 dotfiles will be installed in ~/.local/bin using 'pip install --user dotfiles'
+```
