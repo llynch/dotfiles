@@ -1,0 +1,9 @@
+[dotfiles]
+repository = ~/github/llynch/dotfiles
+ignore = [
+    '.git',
+    '.gitignore',
+    '*.pyc',
+    '*.swp',
+    '*~']
+
