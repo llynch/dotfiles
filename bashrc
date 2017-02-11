@@ -29,7 +29,9 @@ ORANGE=$'\e[33;40m'
 RED=$'\e[31;40m'
 BLUE=$'\e[34;40m'
 #export PS1='${BLUE}\t${D} ${PINK}\u ${D}at ${ORANGE}\h ${D}in ${GREEN}\w${D}\n$ '
-export PS1='${BLUE}\t${D} ${PINK}\u ${D}in ${GREEN}\w${D}\n$ '
+
+export VIRTUAL_ENV_DISABLE_PROMPT=1
+export PS1='${BLUE}\t${D} ${PINK}\u ${D}${ORANGE}$(basename "$VIRTUAL_ENV") ${D}in ${GREEN}\w${D}\n$ '
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
