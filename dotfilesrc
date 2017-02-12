@@ -5,5 +5,6 @@ ignore = [
     '.gitignore',
     '*.pyc',
     '*.swp',
-    '*~']
+    '*~',
+    'README.md']
 
