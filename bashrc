@@ -28,10 +28,18 @@ GREEN=$'\e[32;40m'
 ORANGE=$'\e[33;40m'
 RED=$'\e[31;40m'
 BLUE=$'\e[34;40m'
+YELLOW=$'\e[36;40m'
 #export PS1='${BLUE}\t${D} ${PINK}\u ${D}at ${ORANGE}\h ${D}in ${GREEN}\w${D}\n$ '
 
+parse_git_branch() {
+    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+}
+parse_virtual_env() {
+    venv=$(basename "$VIRTUAL_ENV")
+    test "$VIRTUAL_ENV" > /dev/null && printf "$venv "
+}
 export VIRTUAL_ENV_DISABLE_PROMPT=1
-export PS1='${BLUE}\t${D} ${PINK}\u ${D}${ORANGE}$(basename "$VIRTUAL_ENV") ${D}in ${GREEN}\w${D}\n$ '
+export PS1='${BLUE}\t${D} ${PINK}\u ${D}${ORANGE}$(parse_virtual_env)${D}in ${GREEN}\w${D}${YELLOW}$(parse_git_branch)${D}\n$ '
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
