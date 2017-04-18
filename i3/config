@@ -196,6 +196,7 @@ bindsym $mod+Escape mode "$mode_system"
 bindsym $mod+Pause exec --no-startup-id i3lock, mode "default"
 
 exec --no-startup-id "xbindkeys"
+
 exec --no-startup-id "setxkbmap -option grp:alt_shift_toggle us,ca"
 exec --no-startup-id google-chrome
 
@@ -208,7 +209,6 @@ bindsym XF86AudioMute exec amixer -D pulse set Master toggle
 bindsym XF86AudioRaiseVolume exec amixer -D pulse set Master 5%+
 bindsym XF86AudioLowerVolume exec amixer -D pulse set Master 5%-
 
-bindsym $mod+c exec zenity --title Calendar --calendar
 
 focus_follows_mouse no
 #mouse_warping none
@@ -223,5 +223,23 @@ for_window [class="marlin"] border pixel 0
 for_window [class="Gpick"] floating enable
 for_window [class="Pavucontrol"] floating enable
 for_window [class="TeamViewer"] floating enable
+for_window [class="Xfce4-appfinder"] floating enable
 
 bindsym Mod1+F4 kill
+bindsym Mod1+F3 exec xfce4-appfinder --disable-server
+bindsym $mod+p exec xfce4-appfinder --disable-server
+
+
+set $mode_launcher Launch: [f]irefox [g]oogle-chrome [c]alender [t]eamviewer [p]avucontrol
+bindsym $mod+o mode "$mode_launcher"
+
+mode "$mode_launcher" {
+    bindsym f exec firefox, mode "default"
+    bindsym g exec google-chrome, mode "default"
+    bindsym c exec zenity --title Calendar --calendar, mode "default"
+    bindsym t exec teamviewer, mode "default"
+    bindsym p exec pavucontrol, mode "default"
+
+    bindsym Escape mode "default"
+    bindsym Return mode "default"
+}
