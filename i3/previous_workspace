@@ -1,0 +1,6 @@
+#!/bin/bash
+
+current_workspace=$(i3-msg -t 'get_workspaces' | python -c 'import json; import sys; ws = json.load(sys.stdin); print([w["name"] for w in ws if w["focused"]][0])')
+previous=$(python -c 'import sys; w=int(sys.argv[1])-1; w = w if w > 0 else 10; print w' "$current_workspace")
+
+i3-msg "workspace $previous"
