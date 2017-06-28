@@ -206,7 +206,7 @@ v() {
     vim -c ScratchBuffer -;
 }
 
-highlight() { grep --color -E -- "$1|\$" "${@:2}"; }
+hl() { grep --color -E -- "$1|\$" "${@:2}"; }
 
 countargs() {
     {

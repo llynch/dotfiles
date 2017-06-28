@@ -104,16 +104,26 @@ bindsym $mod+Prior exec bash ~/.i3/previous_workspace
 bindsym $mod+Next exec bash ~/.i3/next_workspace
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace 1
-bindsym $mod+Shift+2 move container to workspace 2
-bindsym $mod+Shift+3 move container to workspace 3
-bindsym $mod+Shift+4 move container to workspace 4
-bindsym $mod+Shift+5 move container to workspace 5
-bindsym $mod+Shift+6 move container to workspace 6
-bindsym $mod+Shift+7 move container to workspace 7
-bindsym $mod+Shift+8 move container to workspace 8
-bindsym $mod+Shift+9 move container to workspace 9
-bindsym $mod+Shift+0 move container to workspace 10
+bindsym $mod+Shift+1 move container to workspace 1; workspace 1
+bindsym $mod+Shift+2 move container to workspace 2; workspace 2
+bindsym $mod+Shift+3 move container to workspace 3; workspace 3
+bindsym $mod+Shift+4 move container to workspace 4; workspace 4
+bindsym $mod+Shift+5 move container to workspace 5; workspace 5
+bindsym $mod+Shift+6 move container to workspace 6; workspace 6
+bindsym $mod+Shift+7 move container to workspace 7; workspace 7
+bindsym $mod+Shift+8 move container to workspace 8; workspace 8
+bindsym $mod+Shift+9 move container to workspace 9; workspace 9
+bindsym $mod+Shift+0 move container to workspace 10; workspace 10
+
+set $move_rowkspace "move workspace: use right or left"
+mode "move_worspace" {
+        bindsym Right move workspace to output right
+        bindsym Left  move workspace to output left
+        bindsym l move workspace to output right
+        bindsym h  move workspace to output left
+        bindsym Escape mode "default"
+}
+bindsym $mod+m mode "move_worspace"
 
 
 # reload the configuration file
@@ -131,10 +141,10 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 10 px or 10 ppt
+        bindsym h resize shrink width 10 px or 10 ppt
         bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym semicolon resize grow width 10 px or 10 ppt
+        bindsym j resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
 
         # same bindings, but for the arrow keys
         bindsym Left resize shrink width 10 px or 10 ppt
@@ -154,7 +164,19 @@ bindsym $mod+r mode "resize"
 # https://github.com/electro7/dotfiles/tree/master/.i3/lemonbar
 #set $blue #285577
 set $blue #224255
+
 bar {
+    output DVI-I-1
+    tray_output DVI-I-1
+
+    status_command i3status
+    position top
+}
+
+bar {
+    output DVI-D-0
+    tray_output DVI-D-0
+
     status_command i3status
     position top
     colors {
@@ -201,8 +223,7 @@ bindsym $mod+Escape mode "$mode_system"
 bindsym $mod+Pause exec --no-startup-id i3lock, mode "default"
 
 exec --no-startup-id "xbindkeys"
-
-exec --no-startup-id "setxkbmap -option grp:alt_shift_toggle us,ca"
+exec --no-startup-id "sleep 5 && setxkbmap -option grp:alt_shift_toggle us,ca"
 exec --no-startup-id google-chrome
 
 bindsym --release Print exec scrot -s -e 'mv $f /tmp/screenshot.png && xclip -selection clipboard -t image/png /tmp/screenshot.png'
@@ -214,6 +235,7 @@ bindsym XF86AudioMute exec amixer -D pulse set Master toggle
 bindsym XF86AudioRaiseVolume exec amixer -D pulse set Master 5%+
 bindsym XF86AudioLowerVolume exec amixer -D pulse set Master 5%-
 
+bindsym $mod+n exec nautilus --no-desktop
 
 focus_follows_mouse no
 #mouse_warping none
@@ -234,8 +256,9 @@ bindsym Mod1+F4 kill
 bindsym Mod1+F3 exec xfce4-appfinder --disable-server
 bindsym $mod+p exec xfce4-appfinder --disable-server
 
+exec --no-startup-id xautolock -time 10 -locker '~/.i3/screensaver'
 
-set $mode_launcher Launch: [f]irefox [g]oogle-chrome [c]alender [t]eamviewer [p]avucontrol
+set $mode_launcher Launch: [f]irefox [g]oogle-chrome [c]alender [t]eamviewer [p]avucontrol [n]autilus [v]irtualbox
 bindsym $mod+o mode "$mode_launcher"
 
 mode "$mode_launcher" {
@@ -244,6 +267,8 @@ mode "$mode_launcher" {
     bindsym c exec zenity --title Calendar --calendar, mode "default"
     bindsym t exec teamviewer, mode "default"
     bindsym p exec pavucontrol, mode "default"
+    bindsym n exec nautilus --no-desktop, mode "default"
+    bindsym v exec virtualbox, mode "default"
 
     bindsym Escape mode "default"
     bindsym Return mode "default"
