@@ -207,7 +207,7 @@ client.background       #ffffff
 # custom keys
 set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
-    bindsym l exec --no-startup-id i3lock, mode "default"
+    bindsym l exec --no-startup-id i3lock -c 000000, mode "default"
     bindsym e exec --no-startup-id i3-msg exit, mode "default"
     #bindsym s exec --no-startup-id i3-msg suspend, mode "default"
     #bindsym h exec --no-startup-id i3-msg hibernate, mode "default"
@@ -220,11 +220,12 @@ mode "$mode_system" {
 }
 
 bindsym $mod+Escape mode "$mode_system"
-bindsym $mod+Pause exec --no-startup-id i3lock, mode "default"
+bindsym $mod+Pause exec --no-startup-id i3lock -c 000000, mode "default"
 
 exec --no-startup-id "xbindkeys"
 exec --no-startup-id "sleep 5 && setxkbmap -option grp:alt_shift_toggle us,ca"
-exec --no-startup-id google-chrome
+#exec --no-startup-id google-chrome
+exec --no-startup-id firefox
 
 bindsym --release Print exec scrot -s -e 'mv $f /tmp/screenshot.png && xclip -selection clipboard -t image/png /tmp/screenshot.png'
 bindsym --release Mod1+Print exec scrot -u -e 'mv $f /tmp/screenshot.png && xclip -selection clipboard -t image/png /tmp/screenshot.png'
@@ -238,7 +239,7 @@ bindsym XF86AudioLowerVolume exec amixer -D pulse set Master 5%-
 bindsym $mod+n exec nautilus --no-desktop
 
 focus_follows_mouse no
-#mouse_warping none
+mouse_warping none
 #new_window pixel 3
 #hide_edge_borders vertical
 
@@ -253,8 +254,8 @@ for_window [class="TeamViewer"] floating enable
 for_window [class="Xfce4-appfinder"] floating enable
 
 bindsym Mod1+F4 kill
-bindsym Mod1+F3 exec xfce4-appfinder --disable-server
 bindsym $mod+p exec xfce4-appfinder --disable-server
+bindsym Mod1+F3 exec xfce4-appfinder --disable-server
 
 exec --no-startup-id xautolock -time 10 -locker '~/.i3/screensaver'
 

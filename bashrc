@@ -217,6 +217,11 @@ countargs() {
     } | wc -l
 }
 
+hdmi2() {
+    echo 'xrandr --output HDMI-2 --auto --left-of eDP-1 --output eDP-1'
+    xrandr --output HDMI-2 --auto --left-of eDP-1 --output eDP-1
+}
+
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/bin" ] ; then
     export PATH=$HOME/bin:$PATH
@@ -227,3 +232,12 @@ fi
 if [ -d "$HOME/.cargo/bin" ] ; then
     export PATH=$HOME/.cargo/bin:$PATH
 fi
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
+source '/home/lynch/github/llynch/cd-history/bootstrap.sh'
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+# vex auto complete
+complete -W "`vex --list`" vex

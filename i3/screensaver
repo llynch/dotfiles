@@ -6,5 +6,5 @@ sleep 60
 status=$(xset q | grep 'Monitor is ' | sed 's/\s*Monitor is \(.*\)$/\1/g')
 
 if [ "$status" == "in Standby" ]; then
-    i3lock -c 222222
+    i3lock -c 000000
 fi
