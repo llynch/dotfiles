@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# if sound is playing don't run screensaver
+pacmd list-sink-inputs  | grep -w state | grep -q RUNNING && exit 0
+
 xset dpms force standby
 
 sleep 60
