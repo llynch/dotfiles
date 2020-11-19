@@ -8,7 +8,8 @@ shopt -s histappend
 export HISTCONTROL=ignoredups
 # ... and ignore same sucessive entries.
 export HISTCONTROL=ignoreboth
-export HISTSIZE=10000
+export HISTFILESIZE=1000000000
+export HISTSIZE=1000000
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -94,9 +95,9 @@ alias lsd='ls -d */'
 alias md='mkdir'
 alias rd='rmdir'
 
-alias rm='rm -vf'
+alias rm='rm -f'
 alias rm~="rm *~" # remove vim backup file
-alias rmd='rm -vfR'
+alias rmd='rm -fR'
 
 # make it human readable
 alias df='df -h'
@@ -127,7 +128,8 @@ alias mnt='sudo mount'
 alias tmux="tmux -2"
 
 # usin xclip to copy to clipboard
-alias copy="xclip -i -selection clipboard"
+alias xclip="xclip -selection clipboard"
+
 
 # http://www.commandlinefu.com/commands/browse/sort-by-votes/
 # quick calculator
@@ -226,6 +228,9 @@ hdmi2() {
 if [ -d "$HOME/bin" ] ; then
     export PATH=$HOME/bin:$PATH
 fi
+if [ -d "$HOME/opt/gradle-4.4.1/bin" ] ; then
+    export PATH="$HOME/opt/gradle-4.4.1/bin":$PATH
+fi
 if [ -d "$HOME/.local/bin" ] ; then
     export PATH=$HOME/.local/bin:$PATH
 fi
@@ -237,7 +242,7 @@ fi
 export PATH="$PATH:$HOME/.rvm/bin"
 source '/home/lynch/github/llynch/cd-history/bootstrap.sh'
 
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
-
 # vex auto complete
 complete -W "`vex --list`" vex
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash

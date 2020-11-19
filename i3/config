@@ -8,7 +8,8 @@
 # i3 config file (v4)
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
-
+#
+#
 set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
@@ -38,10 +39,10 @@ bindsym $mod+d exec dmenu_run
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+semicolon focus right
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -50,10 +51,10 @@ bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+semicolon move right
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -62,7 +63,7 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+h split h
+bindsym $mod+s split h
 
 # split in vertical orientation
 bindsym $mod+v split v
@@ -71,7 +72,7 @@ bindsym $mod+v split v
 bindsym $mod+f fullscreen
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
+#bindsym $mod+s layout stacking
 bindsym $mod+t layout tabbed
 bindsym $mod+e layout toggle split
 
@@ -245,6 +246,7 @@ mouse_warping none
 
 # xprop to find class
 for_window [class="google-chrome"] border pixel 0
+for_window [class="Firefox"] border pixel 0
 for_window [class="nautilus"] border pixel 0
 for_window [class="marlin"] border pixel 0
 
@@ -259,12 +261,13 @@ bindsym Mod1+F3 exec xfce4-appfinder --disable-server
 
 exec --no-startup-id xautolock -time 10 -locker '~/.i3/screensaver'
 
-set $mode_launcher Launch: [f]irefox [g]oogle-chrome [c]alender [t]eamviewer [p]avucontrol [n]autilus [v]irtualbox
+set $mode_launcher Launch: [f]irefox [g]oogle-chrome [k]setxkbmap [c]alender [t]eamviewer [p]avucontrol [n]autilus [v]irtualbox
 bindsym $mod+o mode "$mode_launcher"
 
 mode "$mode_launcher" {
     bindsym f exec firefox, mode "default"
     bindsym g exec google-chrome, mode "default"
+    bindsym k exec "setxkbmap -option grp:alt_shift_toggle us,ca", mode "default"
     bindsym c exec zenity --title Calendar --calendar, mode "default"
     bindsym t exec teamviewer, mode "default"
     bindsym p exec pavucontrol, mode "default"
