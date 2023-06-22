@@ -1,0 +1,18 @@
+#!/bin/bash
+
+export LESS_TERMCAP_mb=$'\e[1;34m'
+export LESS_TERMCAP_md=$'\e[1;34m'
+export LESS_TERMCAP_me=$'\e[0m'
+export LESS_TERMCAP_se=$'\e[0m'
+export LESS_TERMCAP_so=$'\e[01;41m'
+export LESS_TERMCAP_ue=$'\e[0m'
+export LESS_TERMCAP_us=$'\e[1;4;36m'
+
+export PAGER=less
+#export PARGER=most
+
+# Use vim for pager
+#export PAGER="/bin/sh -c \"unset PAGER;col -b -x | \
+#    NVIM_APPNAME=nvim.nvchar nvim -R -c 'set ft=man nomod nolist' -c 'map q :q<CR>' \
+#    -c 'map <SPACE> <C-D>' -c 'map b <C-U>' \
+#    -c 'nmap K :Man <C-R>=expand(\\\"<cword>\\\")<CR><CR>' -\""

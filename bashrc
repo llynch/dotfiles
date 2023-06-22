@@ -87,11 +87,10 @@ if [ "$TERM" != "dumb" ]; then
 fi
 
 # some more ls aliases
+alias ls="\lsd"
 alias ll='ls -lh'
 alias la='ls -A'
 alias l='ls -CF'
-# ld is taken (see $man ld)
-alias lsd='ls -d */'
 
 alias md='mkdir'
 alias rd='rmdir'
@@ -130,7 +129,9 @@ alias tmux="tmux -2"
 
 # usin xclip to copy to clipboard
 alias xclip="xclip -selection clipboard"
-
+alias docker-id='docker ps --format "table {{.ID}}\t{{.Image}}\t{{.Names}}" | sed 1d | fzf -m | awk "{print \$1}"'
+alias g="git"
+alias navi="navi --print"
 
 # http://www.commandlinefu.com/commands/browse/sort-by-votes/
 # quick calculator
@@ -247,3 +248,17 @@ source '/home/lynch/github/llynch/cd-history/bootstrap.sh'
 complete -W "`vex --list`" vex
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+source <(kubectl completion bash)
+kdebug() { kubectl run -i --rm --tty debug --image=alpine/curl --restart=Never -- sh; }
+
+source ~/.bashrc.d/fzf
+source ~/.bashrc.d/lscolors.sh
+source ~/.bashrc.d/man
+source ~/.bashrc.d/nvim
+#source ~/.bashrc.d/powerline
+#oh-my-posh init bash --config ~/.config/ho-my-posh/themes/emodipt-extend.omp.json > ~/.ho-my-posh
+source ~/.ho-my-posh
