@@ -174,9 +174,10 @@ bar {
     position top
 }
 
+
 bar {
-    output DVI-D-0
-    tray_output DVI-D-0
+    output HDMI-0
+    tray_output HDMI-0
 
     status_command i3status
     position top
@@ -228,9 +229,9 @@ exec --no-startup-id "sleep 5 && setxkbmap -option grp:alt_shift_toggle us,ca"
 #exec --no-startup-id google-chrome
 exec --no-startup-id firefox
 
-bindsym --release Print exec scrot -s -e 'mv $f /tmp/screenshot.png && xclip -selection clipboard -t image/png /tmp/screenshot.png'
+bindsym --release Print exec scrot -s -f -e 'mv $f /tmp/screenshot.png && xclip -selection clipboard -t image/png /tmp/screenshot.png'
 bindsym --release Mod1+Print exec scrot -u -e 'mv $f /tmp/screenshot.png && xclip -selection clipboard -t image/png /tmp/screenshot.png'
-bindsym --release $mod+Print exec --no-startup-id scrot -s -e 'eog $f'
+bindsym --release $mod+Print exec --no-startup-id scrot -s -f -e 'eog $f'
 
 # ui for sound volume: pavucontrol
 bindsym XF86AudioMute exec amixer -D pulse set Master toggle
@@ -240,7 +241,7 @@ bindsym XF86AudioLowerVolume exec amixer -D pulse set Master 5%-
 bindsym $mod+n exec nautilus --no-desktop
 
 focus_follows_mouse no
-mouse_warping none
+#mouse_warping none
 #new_window pixel 3
 #hide_edge_borders vertical
 

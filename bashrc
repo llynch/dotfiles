@@ -10,6 +10,7 @@ export HISTCONTROL=ignoredups
 export HISTCONTROL=ignoreboth
 export HISTFILESIZE=1000000000
 export HISTSIZE=1000000
+export HISTTIMEFORMAT="%Y-%m-%d %H:%T "
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
