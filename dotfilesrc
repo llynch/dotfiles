@@ -1,5 +1,5 @@
 [dotfiles]
-repository = ~/github/llynch/dotfiles
+repository = ~/github/dotfiles
 ignore = [
     '.git',
     '.gitignore',

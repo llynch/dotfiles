@@ -10,5 +10,5 @@ export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
 '
 
 # wget -qO ~/.bashrc.d/fzf-bash-completion.sh https://raw.githubusercontent.com/lincheney/fzf-tab-completion/master/bash/fzf-bash-completion.sh
-source ~/.bashrc.d/fzf-bash-completion.sh
-bind -x '"\t\t": fzf_bash_completion'
+#source ~/.bashrc.d/fzf-bash-completion.sh
+#bind -x '"\t\t": fzf_bash_completion'

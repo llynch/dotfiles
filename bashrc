@@ -4,6 +4,7 @@ set completion-ignore-case on
 
 # append to history (it should work for multiple terminals)
 shopt -s histappend
+
 # don't put duplicate lines in the history. See bash(1) for more options
 export HISTCONTROL=ignoredups
 # ... and ignore same sucessive entries.
@@ -40,8 +41,13 @@ parse_virtual_env() {
     venv=$(basename "$VIRTUAL_ENV")
     test "$VIRTUAL_ENV" > /dev/null && printf "$venv "
 }
+parse_kubectl_project() {
+    kubectl_project=`grep project /home/llynch/.config/gcloud/configurations/config_default | sed 's/project = //g'`
+    #kubectl_project=`gcloud config get-value project`
+    test "$kubectl_project" > /dev/null && printf "$kubectl_project "
+}
 export VIRTUAL_ENV_DISABLE_PROMPT=1
-export PS1='${BLUE}\t${D} ${PINK}\u ${D}${ORANGE}$(parse_virtual_env)${D}in ${GREEN}\w${D}${YELLOW}$(parse_git_branch)${D}\n$ '
+export PS1='${BLUE}\t${D} ${PINK}\u ${D}${ORANGE}$(parse_virtual_env)${D}${RED}$(parse_kubectl_project)${D}in ${GREEN}\w${D}${YELLOW}$(parse_git_branch)${D}\n$ '
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
@@ -128,10 +134,20 @@ alias mnt='sudo mount'
 alias tmux="tmux -2"
 
 # usin xclip to copy to clipboard
-alias xclip="xclip -selection clipboard"
+alias xclip='xclip -selection clipboard'
+
+alias k="kubectl"
+complete -F __start_kubectl k
+alias kf="kubectl -n feltboard"
+complete -F __start_kubectl kf
+alias km="kubectl -n mongodb"
+complete -F __start_kubectl km
+alias kga="kubectl get all --all-namespaces"
+
 alias docker-id='docker ps --format "table {{.ID}}\t{{.Image}}\t{{.Names}}" | sed 1d | fzf -m | awk "{print \$1}"'
 alias g="git"
 alias navi="navi --print"
+
 
 # http://www.commandlinefu.com/commands/browse/sort-by-votes/
 # quick calculator
@@ -166,6 +182,7 @@ echoif() { echo "if [ $* ]"; if [ $* ]; then echo true; else echo false; fi; }
 #man () { whatis "$*" && /usr/bin/man -Tutf8 "$*" | col -b | vim -c 'set ft=man' -c 'nmap q :q!<CR>' -; }
 info() { tmp=`mktemp`; /usr/bin/info "$*" > $tmp 2> /dev/null ; vim -c 'set ft=man' -c 'nmap q :q!<CR>' $tmp; /bin/rm -rf $tmp; }
 mank() { /usr/bin/man -k "$*"; }
+cleanjs() { sed 's_\\t__g;s_,\\n\s*}_}_g;s_"{_{_g;s_\\n_\n_g;s_\\"_"_g;/^"$/d' /dev/stdin; }
 # END UTIL
 
 # Got from:
@@ -242,12 +259,14 @@ fi
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
-source '/home/lynch/github/llynch/cd-history/bootstrap.sh'
+source ~/github/llynch/cd-history/bootstrap.sh
 
 # vex auto complete
 complete -W "`vex --list`" vex
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+# export CLOUDSDK_PYTHON=/usr/bin/python2
+
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
