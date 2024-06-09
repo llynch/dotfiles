@@ -1,0 +1,39 @@
+#!/bin/bash
+
+# docker fzf utils
+# usage `dfz <docker-base-command>`
+# It will search for docker container and pass it as arguments to the docker-base-command
+# examples: 
+#   `d dl` will show logs for the selected container
+#   `d docker stop` will stop all containers select
+docker-id() { docker ps --format "table {{.ID}}\t{{.Image}}\t{{.Names}}" | sed 1d | fzf -m | awk "{print \$1}"; }
+d() {
+for id in $(docker-id);
+do 
+    echo "$@" "$id" >&2
+    "$@" "$id"
+  done
+}
+de() { docker exec -it "$@" bash; }
+desh() { docker exec -it "$@" sh; }
+deash() { docker exec -it "$@" ash; }
+dl() { docker logs -f --tail 100 "$@"; }
+logs() { docker logs -f --tail 100 "$@"; }
+dl0() { docker logs -f --tail 0 "$@"; }
+
+# similar but for services
+# ds dsl
+# ds scale0
+# ds scale1
+docker-service() { docker service ls --format "table {{.Name}}\t{{.Image}}\t{{.Replicas}}\t{{.ID}}" | sed 1d | fzf -m | awk "{print \$1}"; }
+ds() {
+  for name in $(docker-service);
+  do 
+    echo "${@:-echo}" "$name" >&2
+    "${@:-echo}" "$name"
+  done
+}
+dsl() { docker service logs -f --tail 100 "$@"; }
+dsl0() { docker service logs -f --tail 0 "$@"; }
+scale0() { for name in $@; do docker service scale -d "$name"=0; done }
+scale1() { for name in $@; do docker service scale -d "$name"=1; done }

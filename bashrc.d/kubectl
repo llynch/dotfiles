@@ -1,0 +1,44 @@
+#!/bin/bash
+
+source <(kubectl completion bash)
+kdebug() { kubectl run -i --rm --tty debug --image=alpine/curl --restart=Never -- sh; }
+
+k() {
+    [ "$#" == 0 ] && {
+        kubectl get --all-namespaces pods
+        return
+    }
+    kubectl get --all-namespaces pods | fzf -m | \
+    while read line
+    do 
+        namespace=$(echo $line | awk '{ print $1 }')
+        pod=$(echo $line | awk '{ print $2 }')
+        #"$@" -n "$namespace" "$pod"
+        case "$1" in
+            "kl") kubectl logs -n "$namespace" --tail 100 -f "$pod" ;;
+            "kl0") kubectl logs -n "$namespace" --tail 0 -f "$pod" ;;
+            "debug") echo kubectl -n "$namespace" "$@" "$pod" ;;
+            "exec") kubectl -n "$namespace" exec -it "$pod" -- "${@:2}" ;;
+            *) kubectl -n "$namespace" "$@" "$pod" ;;
+        esac
+    done
+}
+
+#alias k="kubectl"
+#complete -F __start_kubectl k
+alias kf="kubectl -n feltboard"
+complete -F __start_kubectl kf
+alias kfl="kubectl -n feltboard logs -f --tail 100"
+complete -F __start_kubectl kfl
+alias kfl0="kubectl -n feltboard logs -f --tail 0"
+complete -F __start_kubectl kfl0
+alias km="kubectl -n mongodb"
+complete -F __start_kubectl km
+alias kga="kubectl get all --all-namespaces"
+
+
+complete -F __start_kubectl kl
+alias kl="kubectl logs -f --tail 100"
+complete -F __start_kubectl kl0
+alias kl0="kubectl logs -f --tail 0"
+

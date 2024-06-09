@@ -50,6 +50,7 @@ local default_plugins = {
     end,
   },
 
+  --[[
   {
     "nvim-tree/nvim-web-devicons",
     opts = function()
@@ -60,6 +61,7 @@ local default_plugins = {
       require("nvim-web-devicons").setup(opts)
     end,
   },
+    ]]--
 
   {
     "lukas-reineke/indent-blankline.nvim",
@@ -76,6 +78,7 @@ local default_plugins = {
     end,
   },
 
+  --[[
   {
     "nvim-treesitter/nvim-treesitter",
     init = function()
@@ -91,6 +94,7 @@ local default_plugins = {
       require("nvim-treesitter.configs").setup(opts)
     end,
   },
+  ]]--
 
   -- git stuff
   {
@@ -279,7 +283,7 @@ local default_plugins = {
   { "will133/vim-dirdiff", lazy = false },
   { "ctrlpvim/ctrlp.vim", lazy = false },
   { 'tpope/vim-fugitive', lazy = false },
-
+  { 'gregsexton/gitv', lazy = false }
 }
 
 

@@ -93,10 +93,10 @@ if [ "$TERM" != "dumb" ]; then
 fi
 
 # some more ls aliases
-alias ls="\lsd"
-alias ll='ls -lh'
-alias la='ls -A'
-alias l='ls -CF'
+alias ls='lsd'
+alias ll='lsd -lh'
+alias la='lsd -A'
+alias l='lsd -F'
 
 alias md='mkdir'
 alias rd='rmdir'
@@ -117,7 +117,7 @@ alias apti='sudo apt-get install'
 alias aptc='sudo apt-get clean'
 alias aptp='sudo apt-get purge'
 alias aptr='sudo apt-get remove'
-alias apts='aptitude search'
+alias apts='sudo apt search'
 alias aptu='sudo apt-get update'
 
 # pacman
@@ -136,18 +136,8 @@ alias tmux="tmux -2"
 # usin xclip to copy to clipboard
 alias xclip='xclip -selection clipboard'
 
-alias k="kubectl"
-complete -F __start_kubectl k
-alias kf="kubectl -n feltboard"
-complete -F __start_kubectl kf
-alias km="kubectl -n mongodb"
-complete -F __start_kubectl km
-alias kga="kubectl get all --all-namespaces"
-
-alias docker-id='docker ps --format "table {{.ID}}\t{{.Image}}\t{{.Names}}" | sed 1d | fzf -m | awk "{print \$1}"'
 alias g="git"
 alias navi="navi --print"
-
 
 # http://www.commandlinefu.com/commands/browse/sort-by-votes/
 # quick calculator
@@ -271,13 +261,36 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-source <(kubectl completion bash)
-kdebug() { kubectl run -i --rm --tty debug --image=alpine/curl --restart=Never -- sh; }
 
+#source ~/.bashrc.d/docker
+source ~/.bashrc.d/ducttape
 source ~/.bashrc.d/fzf
+#source ~/.bashrc.d/kubectl
 source ~/.bashrc.d/lscolors.sh
 source ~/.bashrc.d/man
 source ~/.bashrc.d/nvim
+source ~/.bashrc.d/feltboard/variables
+source ~/.bashrc.d/feltboard/main
 #source ~/.bashrc.d/powerline
 #oh-my-posh init bash --config ~/.config/ho-my-posh/themes/emodipt-extend.omp.json > ~/.ho-my-posh
 source ~/.ho-my-posh
+colored_kubectl_project() {
+    echo -ne "${RED}$(parse_kubectl_project)${D}"
+}
+PROMPT_COMMAND="_omp_hook; colored_kubectl_project"
+
+# command to set a tab title
+settitle() { printf "\e]2;${1:-$(basename ${PWD})}\a"; }
+st() { settitle; }
+stt() { settitle; }
+settitle
+
+# https://www.pgrs.net/2022/06/02/simple-command-line-function-to-decode-jwts/
+codejwt-decode() { jq -R 'split(".") |.[0:2] | map(@base64d) | map(fromjson)' <<< $1; }
+
+
+#neofetch --jp2a ~/Pictures/feltboard.jpg --size 22%
+#jp2a ~/Pictures/feltboard.jpg --size=40x22 --colors
+#neofetch --colors 2 12 2 2 2 12 --jp2a ~/Pictures/feltboard.jpg --size 22%
+#cat ~/.prompt
+

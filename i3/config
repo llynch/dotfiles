@@ -28,7 +28,7 @@ floating_modifier $mod
 bindsym $mod+Return exec i3-sensible-terminal
 
 # kill focused window
-bindsym $mod+Shift+q kill
+#bindsym $mod+Shift+q kill
 bindsym $mod+w kill
 
 # start dmenu (a program launcher)
@@ -89,6 +89,8 @@ bindsym $mod+a focus parent
 #bindsym $mod+d focus child
 
 # switch to workspace
+bindsym $mod+grave workspace grave
+bindsym $mod+q workspace q
 bindsym $mod+1 workspace 1
 bindsym $mod+2 workspace 2
 bindsym $mod+3 workspace 3
@@ -100,11 +102,15 @@ bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
 
+bindsym $mod+Tab workspace back_and_forth
+
 # xmodmap -pke
 bindsym $mod+Prior exec bash ~/.i3/previous_workspace
 bindsym $mod+Next exec bash ~/.i3/next_workspace
 
 # move focused container to workspace
+bindsym $mod+Shift+q move container to workspace q; workspace q
+bindsym $mod+Shift+grave move container to workspace grave; workspace grave
 bindsym $mod+Shift+1 move container to workspace 1; workspace 1
 bindsym $mod+Shift+2 move container to workspace 2; workspace 2
 bindsym $mod+Shift+3 move container to workspace 3; workspace 3
@@ -167,8 +173,8 @@ bindsym $mod+r mode "resize"
 set $blue #224255
 
 bar {
-    output DVI-I-1
-    tray_output DVI-I-1
+    output eDP-1
+    tray_output eDP-1
 
     status_command i3status
     position top
@@ -176,8 +182,11 @@ bar {
 
 
 bar {
-    output HDMI-0
-    tray_output HDMI-0
+    # HDMI-2
+    #output DP-1
+    #tray_output DP-1
+    output HDMI-2
+    tray_output HDMI-2
 
     status_command i3status
     position top
@@ -227,7 +236,7 @@ bindsym $mod+Pause exec --no-startup-id i3lock -c 000000, mode "default"
 exec --no-startup-id "xbindkeys"
 exec --no-startup-id "sleep 5 && setxkbmap -option grp:alt_shift_toggle us,ca"
 #exec --no-startup-id google-chrome
-exec --no-startup-id firefox
+exec --no-startup-id google-chrome
 
 bindsym --release Print exec scrot -s -f -e 'mv $f /tmp/screenshot.png && xclip -selection clipboard -t image/png /tmp/screenshot.png'
 bindsym --release Mod1+Print exec scrot -u -e 'mv $f /tmp/screenshot.png && xclip -selection clipboard -t image/png /tmp/screenshot.png'
@@ -238,7 +247,7 @@ bindsym XF86AudioMute exec amixer -D pulse set Master toggle
 bindsym XF86AudioRaiseVolume exec amixer -D pulse set Master 5%+
 bindsym XF86AudioLowerVolume exec amixer -D pulse set Master 5%-
 
-bindsym $mod+n exec nautilus --no-desktop
+bindsym $mod+n exec nemo --no-desktop
 
 focus_follows_mouse no
 #mouse_warping none

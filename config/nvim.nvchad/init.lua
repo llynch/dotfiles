@@ -1,12 +1,12 @@
 require "core"
+
 require "io"
 
 local function load_vimfile(file)
-
-    local f = assert(io.open(file, "r"))
-    local content = f:read("*all")
-    f:close()
-    vim.cmd(content)
+  local f = assert(io.open(file, "r"))
+  local content = f:read "*all"
+  f:close()
+  vim.cmd(content)
 end
 
 local custom_init_path = vim.api.nvim_get_runtime_file("lua/custom/init.lua", false)[1]
@@ -31,14 +31,13 @@ vim.opt.rtp:prepend(lazypath)
 require "plugins"
 
 
-
-load_vimfile('/home/llynch/.config/nvim.nvchad/vimrc')
+load_vimfile('/home/llynch/.vim/vimrc')
 
 -- https://github.com/NvChad/NvChad/blob/v2.0/lua/core/init.lua
 local function update_status()
-    local config = require("core.utils").load_config().ui
-    local content = require('nvchad_ui.statusline.default').run()
-    vim.opt_local.statusline = content
+  -- local config = require("core.utils").load_config().ui
+  local content = require("nvchad_ui.statusline.default").run()
+  vim.opt_local.statusline = content
 end
 
 vim.api.nvim_create_autocmd("BufEnter", {
