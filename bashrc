@@ -249,7 +249,7 @@ fi
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
-source ~/github/llynch/cd-history/bootstrap.sh
+source ~/github/cd-history/bootstrap.sh
 
 # vex auto complete
 complete -W "`vex --list`" vex
@@ -265,6 +265,7 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 #source ~/.bashrc.d/docker
 source ~/.bashrc.d/ducttape
 source ~/.bashrc.d/fzf
+source ~/.bashrc.d/fzf-bash-completion.sh
 #source ~/.bashrc.d/kubectl
 source ~/.bashrc.d/lscolors.sh
 source ~/.bashrc.d/man

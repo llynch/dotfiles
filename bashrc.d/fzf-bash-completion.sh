@@ -529,3 +529,5 @@ _fzf_bash_completion_compopt() {
         shift 2
     done
 }
+
+bind -x '"\t": fzf_bash_completion'

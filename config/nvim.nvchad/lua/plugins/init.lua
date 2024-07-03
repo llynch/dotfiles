@@ -278,6 +278,7 @@ local default_plugins = {
   { "jay-babu/mason-nvim-dap.nvim", lazy=false },
   { "mfussenegger/nvim-dap", lazy=false },
   { "mxsdev/nvim-dap-vscode-js", lazy=false },
+  { "rcarriga/nvim-dap-ui", dependencies = {"mfussenegger/nvim-dap", "nvim-neotest/nvim-nio"} },
 
   { "rking/ag.vim", lazy = false },
   { "will133/vim-dirdiff", lazy = false },
@@ -310,6 +311,10 @@ vim.keymap.set('n', '<leader>B', function()
   require 'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))
 end)
 
+-- Usefull command for DAP and DAPUI are:
+--   :DapContinue
+--   :lua require('dap.breakpoints').toggle()
+--   :lua require('dapui').toggle()
 
 require("dap-vscode-js").setup({
   -- node_path = "node", -- Path of node executable. Defaults to $NODE_PATH, and then "node"
