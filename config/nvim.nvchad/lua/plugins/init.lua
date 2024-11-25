@@ -284,7 +284,8 @@ local default_plugins = {
   { "will133/vim-dirdiff", lazy = false },
   { "ctrlpvim/ctrlp.vim", lazy = false },
   { 'tpope/vim-fugitive', lazy = false },
-  { 'gregsexton/gitv', lazy = false }
+  { 'gregsexton/gitv', lazy = false },
+  { 'lbrayner/vim-rzip', lazy = false }
 }
 
 

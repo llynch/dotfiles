@@ -138,6 +138,7 @@ alias xclip='xclip -selection clipboard'
 
 alias g="git"
 alias navi="navi --print"
+alias cat="bat -p"
 
 # http://www.commandlinefu.com/commands/browse/sort-by-votes/
 # quick calculator
