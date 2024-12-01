@@ -1,5 +1,4 @@
 require "core"
-
 require "io"
 
 local function load_vimfile(file)
@@ -31,17 +30,17 @@ vim.opt.rtp:prepend(lazypath)
 require "plugins"
 
 
-load_vimfile('/home/llynch/.vim/vimrc')
+load_vimfile('/home/lynch/.vim/vimrc')
 
 -- https://github.com/NvChad/NvChad/blob/v2.0/lua/core/init.lua
-local function update_status()
-  -- local config = require("core.utils").load_config().ui
-  local content = require("nvchad_ui.statusline.default").run()
-  vim.opt_local.statusline = content
-end
-
-vim.api.nvim_create_autocmd("BufEnter", {
-    callback = update_status
-})
-
-vim.opt.statusline = nil
+-- local function update_status()
+--     local config = require("core.utils").load_config().ui
+--     local content = require('nvchad_ui.statusline.default').run()
+--     vim.opt_local.statusline = content
+-- end
+-- 
+-- vim.api.nvim_create_autocmd("BufEnter", {
+--     callback = update_status
+-- })
+-- 
+-- vim.opt.statusline = nil

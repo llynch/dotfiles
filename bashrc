@@ -247,6 +247,9 @@ fi
 if [ -d "$HOME/.cargo/bin" ] ; then
     export PATH=$HOME/.cargo/bin:$PATH
 fi
+if [ -d "$HOME/.cargo/env" ] ; then
+    . "$HOME/.cargo/env"
+fi
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
@@ -275,11 +278,11 @@ source ~/.bashrc.d/feltboard/variables
 source ~/.bashrc.d/feltboard/main
 #source ~/.bashrc.d/powerline
 #oh-my-posh init bash --config ~/.config/ho-my-posh/themes/emodipt-extend.omp.json > ~/.ho-my-posh
-source ~/.ho-my-posh
+#source ~/.ho-my-posh
 colored_kubectl_project() {
-    echo -ne "${RED}$(parse_kubectl_project)${D}"
+    printf "${RED}$(parse_kubectl_project)${D}"
 }
-PROMPT_COMMAND="_omp_hook; colored_kubectl_project"
+#PROMPT_COMMAND="_omp_hook; "
 
 # command to set a tab title
 settitle() { printf "\e]2;${1:-$(basename ${PWD})}\a"; }

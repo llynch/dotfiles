@@ -1,26 +1,5 @@
--- https://github.com/nvim-tree/nvim-tree.lua/issues/674
-
-local nvim_tree = require'nvim-tree'
-
-local function go_to_next_window()
-  vim.cmd("wincmd w")
-end
-
--- https://github.com/nvim-tree/nvim-tree.lua/wiki/Migrating-To-on_attach
-local function nvimtree_on_attach(bufnr)
-  local api = require('nvim-tree.api')
-
-  local function opts(desc)
-return { desc = 'nvim-tree: ' .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
-  end
-
-  api.config.mappings.default_on_attach(bufnr)
-
-  vim.keymap.set('n', '<Tab>', go_to_next_window,                 opts('Open Preview'))
-end
-
 local options = {
-  on_attach = nvimtree_on_attach,
+  -- on_attach = nvimtree_on_attach,
   filters = {
     dotfiles = false,
     exclude = { vim.fn.stdpath "config" .. "/lua/custom" },
