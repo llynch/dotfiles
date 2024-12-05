@@ -1,3 +1,46 @@
+local telescope = require('telescope')
+local CD_HISTORY_DIR = vim.fn.getenv "CD_HISTORY_DIR"
+
+local cdh = {}
+if (CD_HISTORY_DIR ~= nil) then
+-- probably best if we update LUA_PATH from bashrc
+    package.path = package.path .. ';' .. vim.fs.joinpath(CD_HISTORY_DIR, '?.lua')
+    -- vim.api.nvim_out_write(vim.inspect(package.path) .. '\n')
+    cdh = require('nvim-cd-history')
+end
+
+local function prompt_strip_spaces(prompt)
+    -- allow support for spaces because 
+    local new_prompt = {}
+    vim.api.nvim_out_write(prompt .. '\n')
+    new_prompt.prompt = prompt:gsub(" ", "")
+    return new_prompt
+end
+
+telescope.setup({
+    defaults = {
+        -- Default configuration for telescope goes here:
+        -- config_key = value,
+        mappings = {
+            i = {
+                -- map actions.which_key to <C-h> (default: <C-/>)
+                -- actions.which_key shows the mappings for your picker,
+                -- e.g. git_{create, delete, ...}_branch for the git_branches picker
+                ["<C-h>"] = "which_key"
+            }
+        }
+    },
+    pickers = {
+        find_files = { on_input_filter_cb = prompt_strip_spaces },
+        oldfiles = { on_input_filter_cb = prompt_strip_spaces },
+        buffers = { on_input_filter_cb = prompt_strip_spaces },
+        lsp_references = { on_input_filter_cb = prompt_strip_spaces }
+    },
+    extensions = {
+
+    }
+})
+
 local builtin = require('telescope.builtin')
 -- vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
 vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
@@ -12,7 +55,13 @@ vim.keymap.set('n', '<leader><leader>f', builtin.resume, {})
 vim.keymap.set('n', '<leader>fs', builtin.treesitter, {})
 vim.keymap.set('n', '<leader>ft', builtin.tags, {})
 vim.keymap.set('n', '<leader>fw', builtin.live_grep, {})
-
+local function cdh_c()
+    cdh.c({
+        on_input_filter_cb = prompt_strip_spaces
+    })
+end
+vim.keymap.set('n', '<leader>c', cdh_c, {})
+vim.keymap.set('n', '<leader>fc', cdh_c, {})
 
 local colors = require("catppuccin.palettes").get_palette()
 local TelescopeColor = {
@@ -34,3 +83,4 @@ local TelescopeColor = {
 for hl, col in pairs(TelescopeColor) do
 	vim.api.nvim_set_hl(0, hl, col)
 end
+
