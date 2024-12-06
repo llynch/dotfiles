@@ -98,6 +98,14 @@ alias ll='lsd -lh'
 alias la='lsd -A'
 alias l='lsd -F'
 
+#alias ls="\lsd"
+alias di='docker inspect'
+alias did='docker ps --format "table {{.ID}}\t{{.Image}}\t{{.Names}}" | sed 1d | fzf -m | awk "{print \$1}"'
+
+#alias ll='ls -lh'
+#alias la='ls -A'
+#alias l='ls -CF'
+
 alias md='mkdir'
 alias rd='rmdir'
 
@@ -113,12 +121,12 @@ alias du1='du -h --max-depth=1'
 alias ..='cd ..'
 
 # apt-get
-alias apti='sudo apt-get install'
-alias aptc='sudo apt-get clean'
-alias aptp='sudo apt-get purge'
-alias aptr='sudo apt-get remove'
+alias apti='sudo apt get install -y'
+alias aptc='sudo apt get clean'
+alias aptp='sudo apt get purge'
+alias aptr='sudo apt get remove'
 alias apts='sudo apt search'
-alias aptu='sudo apt-get update'
+alias aptu='sudo apt-get update -y'
 
 # pacman
 alias paci='sudo pacman -S'
@@ -266,18 +274,21 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 
+export DUCTTAPE_DIR=~/github/llynch/ducttape/
+
 #source ~/.bashrc.d/docker
 source ~/.bashrc.d/ducttape
-source ~/.bashrc.d/fzf
-source ~/.bashrc.d/fzf-bash-completion.sh
+#source ~/.bashrc.d/fzf
+#source ~/.bashrc.d/fzf-bash-completion.sh
 #source ~/.bashrc.d/kubectl
 source ~/.bashrc.d/lscolors.sh
 source ~/.bashrc.d/man
 source ~/.bashrc.d/nvim
-source ~/.bashrc.d/feltboard/variables
-source ~/.bashrc.d/feltboard/main
+#source ~/.bashrc.d/feltboard/variables
+#source ~/.bashrc.d/feltboard/main
 #source ~/.bashrc.d/powerline
 #oh-my-posh init bash --config ~/.config/ho-my-posh/themes/emodipt-extend.omp.json > ~/.ho-my-posh
+
 #source ~/.ho-my-posh
 colored_kubectl_project() {
     printf "${RED}$(parse_kubectl_project)${D}"
@@ -293,9 +304,13 @@ settitle
 # https://www.pgrs.net/2022/06/02/simple-command-line-function-to-decode-jwts/
 codejwt-decode() { jq -R 'split(".") |.[0:2] | map(@base64d) | map(fromjson)' <<< $1; }
 
-
 #neofetch --jp2a ~/Pictures/feltboard.jpg --size 22%
 #jp2a ~/Pictures/feltboard.jpg --size=40x22 --colors
 #neofetch --colors 2 12 2 2 2 12 --jp2a ~/Pictures/feltboard.jpg --size 22%
 #cat ~/.prompt
 
+#source ~/.ho-my-posh
+
+# curl -sS https://starship.rs/install.sh | sh
+eval "$(starship init bash)"
+source ~/.bash.tmux-bash-completion
