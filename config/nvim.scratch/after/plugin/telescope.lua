@@ -41,13 +41,27 @@ telescope.setup({
     }
 })
 
+local function option_cwd(wrapped_telescope_picker)
+    function call_picker(...)
+        local options = {}
+        local bufnr = vim.api.nvim_get_current_buf()
+        local filename = vim.api.nvim_buf_get_name(bufnr)
+        local directory = vim.fs.dirname(filename)
+        -- todo check if its a git repo, telescope error is not pretty.
+        options.cwd = directory
+        wrapped_telescope_picker(options)
+    end
+    return call_picker
+end
+
 local builtin = require('telescope.builtin')
--- vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
 vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
 vim.keymap.set('n', '<leader>l', builtin.buffers, {})
 vim.keymap.set('n', '<leader>fi', builtin.builtin, {})
 vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
-vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
+vim.keymap.set('n', '<leader>fg', option_cwd(builtin.git_files), {})
+vim.keymap.set('n', '<leader>flf', option_cwd(builtin.find_files), {})
+vim.keymap.set('n', '<leader>flw', option_cwd(builtin.live_grep), {})
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 vim.keymap.set('n', '<leader>fo', builtin.oldfiles, {})
 vim.keymap.set('n', '<leader>fr', builtin.lsp_references, {})
