@@ -19,20 +19,25 @@ set $mod Mod4
 # clear in small sizes. However, if you need a lot of unicode glyphs or
 # right-to-left text rendering, you should instead use pango for rendering and
 # chose a FreeType font, such as:
-font pango:DejaVu Sans Mono 10
+font pango:DejaVu Sans Mono 12
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+#bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec GTK_IM_MODULE=simple ~/.local/bin/ghostty
 
 # kill focused window
 #bindsym $mod+Shift+q kill
 bindsym $mod+w kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run
+#bindsym $mod+d exec dmenu_run
+bindsym $mod+d exec --no-startup-id "rofi -show combi -combi-modes window,drun -modes combi -show-icons"
+#bindsym $mod+d exec --no-startup-id "~/.config/polybar/shapes/scripts/launcher.sh"
+#bindsym $mod+d exec --no-startup-id "~/.config/polybar/launcher.sh"
+
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
@@ -164,38 +169,47 @@ bindsym $mod+r mode "resize"
 #set $blue #285577
 set $blue #224255
 
-bar {
-    output eDP-1
-    tray_output eDP-1
+exec_always --no-startup-id sh ~/.i3/polybar-restart
+#exec_always --no-startup-id sh ~/.config/polybar/shapes/launch.sh &
 
-    status_command i3status
-    position top
-}
-
-
-bar {
-    # HDMI-2
-    #output DP-1
-    #tray_output DP-1
-    output HDMI-2
-    tray_output HDMI-2
-
-    status_command i3status
-    position top
-    colors {
-        background #232323
-        statusline #dcdcdc
-        separator #ffffff
-
-        focused_workspace  #4c7899 $blue #ffffff
-        active_workspace   #333333 #5f676a #ffffff
-        inactive_workspace #333333 #222222 #888888
-        urgent_workspace   #2f343a #900000 #ffffff
-        #binding_mode       #2f343a #900000 #ffffff
-        
-    }
-}
-
+# bar {
+#     mode hide
+#     hidden_state hide
+#
+#     output DVI-I-1
+#     tray_output DVI-I-1
+#
+#     #status_command i3status
+#     position top
+# }
+#
+#
+# bar {
+#     mode hide
+#     hidden_state hide
+#
+#     # HDMI-2
+#     #output DP-1
+#     #tray_output DP-1
+#     output HDMI-0
+#     tray_output HDMI-0
+#
+#     #status_command i3status
+#     position top
+#     colors {
+#         background #232323
+#         statusline #dcdcdc
+#         separator #ffffff
+#
+#         focused_workspace  #4c7899 $blue #ffffff
+#         active_workspace   #333333 #5f676a #ffffff
+#         inactive_workspace #333333 #222222 #888888
+#         urgent_workspace   #2f343a #900000 #ffffff
+#         #binding_mode       #2f343a #900000 #ffffff
+#
+#     }
+# }
+#
 
 # http://i3wm.org/docs/4.2/userguide.html#_changing_colors
 #
@@ -231,14 +245,14 @@ exec --no-startup-id "sleep 5 && setxkbmap -option grp:alt_shift_toggle us,ca"
 #exec --no-startup-id google-chrome
 exec --no-startup-id google-chrome
 
-bindsym --release Print exec scrot -s -f -e 'mv $f /tmp/screenshot.png && xclip -selection clipboard -t image/png /tmp/screenshot.png'
+bindsym --release Print exec scrot -s -f -e "mv \$f /tmp/screenshot.png && cp /tmp/screenshot.png ~/Pictures/Screenshots/$(date +%F_%T.png) && xclip -selection clipboard -t image/png /tmp/screenshot.png"
 bindsym --release Mod1+Print exec scrot -u -e 'mv $f /tmp/screenshot.png && xclip -selection clipboard -t image/png /tmp/screenshot.png'
 bindsym --release $mod+Print exec --no-startup-id scrot -s -f -e 'eog $f'
 
 # ui for sound volume: pavucontrol
-bindsym XF86AudioMute exec amixer -D pulse set Master toggle
-bindsym XF86AudioRaiseVolume exec amixer -D pulse set Master 5%+
-bindsym XF86AudioLowerVolume exec amixer -D pulse set Master 5%-
+bindsym XF86AudioMute exec pactl list | grep alsa_output | grep Name | sd '.*:' '' | xargs -i sh -c 'pactl set-sink-volume {} 0%'
+bindsym XF86AudioRaiseVolume exec pactl list | grep alsa_output | grep Name | sd '.*:' '' | xargs -i sh -c 'pactl set-sink-volume {} +5%'
+bindsym XF86AudioLowerVolume exec pactl list | grep alsa_output | grep Name | sd '.*:' '' | xargs -i sh -c 'pactl set-sink-volume {} -5%'
 
 bindsym $mod+n exec nemo --no-desktop
 
@@ -259,7 +273,8 @@ for_window [class="TeamViewer"] floating enable
 for_window [class="Xfce4-appfinder"] floating enable
 
 bindsym Mod1+F4 kill
-bindsym $mod+p exec xfce4-appfinder --disable-server
+#bindsym $mod+p exec xfce4-appfinder --disable-server
+bindsym $mod+p exec pavucontrol
 bindsym Mod1+F3 exec xfce4-appfinder --disable-server
 
 exec --no-startup-id xautolock -time 10 -locker '~/.i3/screensaver'

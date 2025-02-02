@@ -47,7 +47,7 @@ parse_kubectl_project() {
     test "$kubectl_project" > /dev/null && printf "$kubectl_project "
 }
 export VIRTUAL_ENV_DISABLE_PROMPT=1
-export PS1='${BLUE}\t${D} ${PINK}\u ${D}${ORANGE}$(parse_virtual_env)${D}${RED}$(parse_kubectl_project)${D}in ${GREEN}\w${D}${YELLOW}$(parse_git_branch)${D}\n$ '
+export PS1='${BLUE}\t${D} ${PINK}\u ${D}${ORANGE}$(parse_virtual_env)${D}in ${GREEN}\w${D}${YELLOW}$(parse_git_branch)${D}\n$ '
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
@@ -93,10 +93,11 @@ if [ "$TERM" != "dumb" ]; then
 fi
 
 # some more ls aliases
-alias ls='lsd'
-alias ll='lsd -lh'
-alias la='lsd -A'
-alias l='lsd -F'
+alias ls='eza --icons'
+alias ll='eza -lh --icons'
+alias la='eza -A --icons'
+alias l='eza -F --icons'
+alias fd='fdfind'
 
 #alias ls="\lsd"
 alias di='docker inspect'
@@ -121,12 +122,12 @@ alias du1='du -h --max-depth=1'
 alias ..='cd ..'
 
 # apt-get
-alias apti='sudo apt get install -y'
-alias aptc='sudo apt get clean'
-alias aptp='sudo apt get purge'
-alias aptr='sudo apt get remove'
+alias apti='sudo apt install -y'
+alias aptc='sudo apt clean'
+alias aptp='sudo apt purge'
+alias aptr='sudo apt remove'
 alias apts='sudo apt search'
-alias aptu='sudo apt-get update -y'
+alias aptu='sudo apt update -y'
 
 # pacman
 alias paci='sudo pacman -S'
@@ -288,6 +289,12 @@ source ~/.bashrc.d/nvim
 #source ~/.bashrc.d/feltboard/main
 #source ~/.bashrc.d/powerline
 #oh-my-posh init bash --config ~/.config/ho-my-posh/themes/emodipt-extend.omp.json > ~/.ho-my-posh
+
+# Ghsotty
+# running ghostty on ubuntu 24.04.1 LTS with ibus version 1.5.29 and gtk version 4.14.2 fixes the accent issue for me.
+#found this tip here: https://bugs.launchpad.net/ubuntu/+source/ibus/+bug/2064025
+export GTK_IM_MODULE=simple
+
 
 #source ~/.ho-my-posh
 colored_kubectl_project() {

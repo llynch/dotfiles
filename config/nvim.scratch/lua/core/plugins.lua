@@ -54,6 +54,14 @@ return require('packer').startup(function(use)
 
   use { "ThePrimeagen/harpoon", branch = "harpoon2", requires = { {"nvim-lua/plenary.nvim"} } }
 
+  use { "tikhomirov/vim-glsl" }
+
+  use { '3rd/image.nvim', rocks = { 'magick' } }
+  use { 'samjwill/vim-bufdir' }
+
+  -- rust plugin
+  -- https://github.com/mrcjkb/rustaceanvim
+  -- use { 'mrcjkb/rustaceanvim', version = '^5', rocks = { 'rustaceanvim'} }
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
