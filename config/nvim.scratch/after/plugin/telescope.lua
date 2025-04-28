@@ -56,6 +56,7 @@ end
 
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
+vim.keymap.set( "n", "<leader>fd", "<cmd>Telescope diagnostics bufnr=0 theme=dropdown prompt_title=diagnostics previewer=false <CR>")
 vim.keymap.set('n', '<leader>l', builtin.buffers, {})
 vim.keymap.set('n', '<leader>fi', builtin.builtin, {})
 vim.keymap.set('n', '<leader>ff', builtin.find_files, {})

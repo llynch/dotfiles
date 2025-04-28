@@ -59,6 +59,8 @@ return require('packer').startup(function(use)
   use { '3rd/image.nvim', rocks = { 'magick' } }
   use { 'samjwill/vim-bufdir' }
 
+  use { 'github/copilot.vim' }
+
   -- rust plugin
   -- https://github.com/mrcjkb/rustaceanvim
   -- use { 'mrcjkb/rustaceanvim', version = '^5', rocks = { 'rustaceanvim'} }

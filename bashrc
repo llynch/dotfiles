@@ -149,6 +149,8 @@ alias g="git"
 alias navi="navi --print"
 alias cat="bat -p"
 
+alias venv="source .venv/bin/activate"
+
 # http://www.commandlinefu.com/commands/browse/sort-by-votes/
 # quick calculator
 ? () { echo "$*" | bc -l; }

@@ -3,6 +3,7 @@
 #alias nvim-kick="NVIM_APPNAME=kickstart nvim"
 
 export PATH="$PATH:/opt/nvim-linux64/bin"
+export NVIM_APPNAME=nvim.scratch
 
 alias nv="NVIM_APPNAME=nvim.scratch nvim"
 alias nv-chad="NVIM_APPNAME=nvim.nvchad nvim"

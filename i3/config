@@ -253,6 +253,9 @@ bindsym --release $mod+Print exec --no-startup-id scrot -s -f -e 'eog $f'
 bindsym XF86AudioMute exec pactl list | grep alsa_output | grep Name | sd '.*:' '' | xargs -i sh -c 'pactl set-sink-volume {} 0%'
 bindsym XF86AudioRaiseVolume exec pactl list | grep alsa_output | grep Name | sd '.*:' '' | xargs -i sh -c 'pactl set-sink-volume {} +5%'
 bindsym XF86AudioLowerVolume exec pactl list | grep alsa_output | grep Name | sd '.*:' '' | xargs -i sh -c 'pactl set-sink-volume {} -5%'
+# bindsym XF86AudioMute exec amixer set Master toggle
+# bindsym XF86AudioRaiseVolume exec amixer set Master 5%+
+# bindsym XF86AudioLowerVolume exec amixer set Master 5%-
 
 bindsym $mod+n exec nemo --no-desktop
 

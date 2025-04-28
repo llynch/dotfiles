@@ -15,7 +15,8 @@ $directory\
 ${custom.directory_separator_not_git}\
 ${custom.directory_separator_git}\
 $symbol($git_branch[](fg:git_color))\
-$symbol( $git_commit$git_metrics$git_state)$nodejs
+$symbol($git_commit$git_metrics$git_state) $nodejs $python\
+${custom.gcloud_project}
 $character"""
 
 # Fill character (empty space) between the left and right prompt
@@ -139,3 +140,15 @@ directory_text = "#FFFFFF"
 
 git_color = "#422222"
 git_text = "#FFFFFF"
+
+
+# documentation for custom commands:
+# https://starship.rs/config/#custom-commands
+[custom.gcloud_project]
+disabled = false
+command = 'sh ~/bin/gcloud_project'
+#detect_extensions = ['pst'] # filters *.pst files
+#shell = ['~/bin/gcloud_project']
+when = 'true'
+format = '[$output ]($style)'
+style = "fg:#ff0000"
