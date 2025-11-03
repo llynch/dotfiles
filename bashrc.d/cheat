@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+export CHEAT_USE_FZF=1

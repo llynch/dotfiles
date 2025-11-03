@@ -167,8 +167,8 @@ translate(){ wget -qO- "http://ajax.googleapis.com/ajax/services/language/transl
 
 # UTIL
 #
-if [ -f ~/cd-history/bootstrap.sh ]; then
-    source ~/cd-history/bootstrap.sh
+if [ -f ~/github/llynch/cd-history/bootstrap.sh ]; then
+    source ~/github/llynch/cd-history/bootstrap.sh
 fi
 #alias c=cdd
 #
@@ -264,7 +264,7 @@ fi
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
-source ~/github/cd-history/bootstrap.sh
+source ~/github/llynch/cd-history/bootstrap.sh
 
 # vex auto complete
 complete -W "`vex --list`" vex
@@ -280,12 +280,14 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 export DUCTTAPE_DIR=~/github/llynch/ducttape/
 
 #source ~/.bashrc.d/docker
-source ~/.bashrc.d/ducttape
-#source ~/.bashrc.d/fzf
+source $DUCTTAPE_DIR/aliases.sh
+source ~/.bashrc.d/cheat
+source ~/.bashrc.d/fzf
 #source ~/.bashrc.d/fzf-bash-completion.sh
 #source ~/.bashrc.d/kubectl
 source ~/.bashrc.d/lscolors.sh
 source ~/.bashrc.d/man
+source ~/.bashrc.d/nix.sh
 source ~/.bashrc.d/nvim
 #source ~/.bashrc.d/feltboard/variables
 #source ~/.bashrc.d/feltboard/main
@@ -323,3 +325,7 @@ codejwt-decode() { jq -R 'split(".") |.[0:2] | map(@base64d) | map(fromjson)' <<
 # curl -sS https://starship.rs/install.sh | sh
 eval "$(starship init bash)"
 source ~/.bash.tmux-bash-completion
+
+# opencode
+export PATH=/home/lynch/.opencode/bin:$PATH
+export EDITOR=nvim

@@ -6,7 +6,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', 'gd', function() vim.lsp.buf.definition() end, opts)
     vim.keymap.set('n', 'gi', function() vim.lsp.buf.implementation() end, opts)
     vim.keymap.set('n', 'K', function() vim.lsp.buf.hover() end, opts)
-    -- vim.keymap.set('n', '<leader>ds', function() vim.lsp.buf.workspace_symbol() end, opts)
+    vim.keymap.set('n', '<leader>ds', function() vim.lsp.buf.workspace_symbol() end, opts)
     vim.keymap.set('n', '<leader>d', function() vim.diagnostic.open_float() end, opts)
     vim.keymap.set('n', '[d', function() vim.diagnostic.goto_next() end, opts)
     vim.keymap.set('n', ']d', function() vim.diagnostic.goto_prev() end, opts)
@@ -21,7 +21,8 @@ local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 require('mason').setup({})
 require('mason-lspconfig').setup({
-  ensure_installed = {'ts_ls', 'rust_analyzer'},
+  automatic_enable = true,
+  ensure_installed = {'ts_ls', 'lua_ls'},
   handlers = {
     function(server_name)
       require('lspconfig')[server_name].setup({
@@ -56,8 +57,8 @@ local cmp_select = {behavior = cmp.SelectBehavior.Select}
 
 cmp.setup({
   sources = cmp.config.sources({
-    {name = 'nvim_lsp'},  
-    {name = 'luasnip'},  
+    {name = 'nvim_lsp'},
+    -- {name = 'luasnip'},  
   }, {
     {name = 'buffer'},
   }),
@@ -67,9 +68,11 @@ cmp.setup({
     ['<CR>'] = cmp.mapping.confirm({select = true}),
     ['<C-Space>'] = cmp.mapping.complete(),
   }),
+  --[[
   snippet = {
     expand = function(args)
       require('luasnip').lsp_expand(args.body)
     end,
   },
+  ]]--
 })

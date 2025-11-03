@@ -37,12 +37,19 @@ return require('packer').startup(function(use)
 
   -- https://lsp-zero.netlify.app/blog/theprimeagens-config-from-2022.html
   use { 'neovim/nvim-lspconfig' }
-  use { 'williamboman/mason.nvim' }
-  use { 'williamboman/mason-lspconfig.nvim' }
+  use { 'mason-org/mason.nvim' }
+  use {
+    "mason-org/mason-lspconfig.nvim",
+    opts = {},
+    dependencies = {
+        { "mason-org/mason.nvim", opts = {} },
+        "neovim/nvim-lspconfig",
+    },
+}
   use { 'hrsh7th/nvim-cmp' }
   use { 'hrsh7th/cmp-nvim-lsp' }
   use { 'hrsh7th/cmp-buffer' }
-  use { 'saadparwaiz1/cmp_luasnip' }
+  -- use { 'saadparwaiz1/cmp_luasnip' }
   use({ "L3MON4D3/LuaSnip", tag = "v2.*", run = "make install_jsregexp" })
 
   use { "folke/trouble.nvim", requires = "kyazdani42/nvim-web-devicons" }
@@ -56,10 +63,25 @@ return require('packer').startup(function(use)
 
   use { "tikhomirov/vim-glsl" }
 
-  use { '3rd/image.nvim', rocks = { 'magick' } }
+  -- use { '3rd/image.nvim', rocks = { 'magick' } }
   use { 'samjwill/vim-bufdir' }
-
   use { 'github/copilot.vim' }
+  -- use { "zbirenbaum/copilot.lua" }
+  use { 'stevearc/oil.nvim' }
+
+  use { "kndndrj/nvim-dbee", requires = { "MunifTanjim/nui.nvim", },
+      run = function()
+        -- Install tries to automatically detect the install method.
+        -- if it fails, try calling it with one of these parameters:
+        --    "curl", "wget", "bitsadmin", "go"
+        require("dbee").install()
+      end,
+      config = function()
+        require("dbee").setup(--[[optional config]])
+      end
+  }
+
+  use { 'xiyaowong/telescope-emoji.nvim' }
 
   -- rust plugin
   -- https://github.com/mrcjkb/rustaceanvim

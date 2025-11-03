@@ -49,8 +49,8 @@ local function save_profiles(threshold)
 end
 
 time([[Luarocks path setup]], true)
-local package_path_str = "/home/lynch/.cache/nvim.scratch/packer_hererocks/2.1.1713484068/share/lua/5.1/?.lua;/home/lynch/.cache/nvim.scratch/packer_hererocks/2.1.1713484068/share/lua/5.1/?/init.lua;/home/lynch/.cache/nvim.scratch/packer_hererocks/2.1.1713484068/lib/luarocks/rocks-5.1/?.lua;/home/lynch/.cache/nvim.scratch/packer_hererocks/2.1.1713484068/lib/luarocks/rocks-5.1/?/init.lua"
-local install_cpath_pattern = "/home/lynch/.cache/nvim.scratch/packer_hererocks/2.1.1713484068/lib/lua/5.1/?.so"
+local package_path_str = "/home/lynch/.cache/nvim.scratch/packer_hererocks/2.1.1741730670/share/lua/5.1/?.lua;/home/lynch/.cache/nvim.scratch/packer_hererocks/2.1.1741730670/share/lua/5.1/?/init.lua;/home/lynch/.cache/nvim.scratch/packer_hererocks/2.1.1741730670/lib/luarocks/rocks-5.1/?.lua;/home/lynch/.cache/nvim.scratch/packer_hererocks/2.1.1741730670/lib/luarocks/rocks-5.1/?/init.lua"
+local install_cpath_pattern = "/home/lynch/.cache/nvim.scratch/packer_hererocks/2.1.1741730670/lib/lua/5.1/?.so"
 if not string.find(package.path, package_path_str, 1, true) then
   package.path = package.path .. ';' .. package_path_str
 end
@@ -99,10 +99,10 @@ _G.packer_plugins = {
     path = "/home/lynch/.local/share/nvim.scratch/site/pack/packer/start/cmp-nvim-lsp",
     url = "https://github.com/hrsh7th/cmp-nvim-lsp"
   },
-  cmp_luasnip = {
+  ["copilot.vim"] = {
     loaded = true,
-    path = "/home/lynch/.local/share/nvim.scratch/site/pack/packer/start/cmp_luasnip",
-    url = "https://github.com/saadparwaiz1/cmp_luasnip"
+    path = "/home/lynch/.local/share/nvim.scratch/site/pack/packer/start/copilot.vim",
+    url = "https://github.com/github/copilot.vim"
   },
   ["ctrlp.vim"] = {
     loaded = true,
@@ -114,6 +114,11 @@ _G.packer_plugins = {
     path = "/home/lynch/.local/share/nvim.scratch/site/pack/packer/start/gitv",
     url = "https://github.com/gregsexton/gitv"
   },
+  harpoon = {
+    loaded = true,
+    path = "/home/lynch/.local/share/nvim.scratch/site/pack/packer/start/harpoon",
+    url = "https://github.com/ThePrimeagen/harpoon"
+  },
   ["lualine.nvim"] = {
     loaded = true,
     path = "/home/lynch/.local/share/nvim.scratch/site/pack/packer/start/lualine.nvim",
@@ -122,12 +127,12 @@ _G.packer_plugins = {
   ["mason-lspconfig.nvim"] = {
     loaded = true,
     path = "/home/lynch/.local/share/nvim.scratch/site/pack/packer/start/mason-lspconfig.nvim",
-    url = "https://github.com/williamboman/mason-lspconfig.nvim"
+    url = "https://github.com/mason-org/mason-lspconfig.nvim"
   },
   ["mason.nvim"] = {
     loaded = true,
     path = "/home/lynch/.local/share/nvim.scratch/site/pack/packer/start/mason.nvim",
-    url = "https://github.com/williamboman/mason.nvim"
+    url = "https://github.com/mason-org/mason.nvim"
   },
   nerdtree = {
     loaded = true,
@@ -153,6 +158,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/lynch/.local/share/nvim.scratch/site/pack/packer/start/nvim-web-devicons",
     url = "https://github.com/nvim-tree/nvim-web-devicons"
+  },
+  ["oil.nvim"] = {
+    loaded = true,
+    path = "/home/lynch/.local/share/nvim.scratch/site/pack/packer/start/oil.nvim",
+    url = "https://github.com/stevearc/oil.nvim"
   },
   ["packer.nvim"] = {
     loaded = true,
@@ -184,6 +194,11 @@ _G.packer_plugins = {
     path = "/home/lynch/.local/share/nvim.scratch/site/pack/packer/start/undotree",
     url = "https://github.com/jiaoshijie/undotree"
   },
+  ["vim-bufdir"] = {
+    loaded = true,
+    path = "/home/lynch/.local/share/nvim.scratch/site/pack/packer/start/vim-bufdir",
+    url = "https://github.com/samjwill/vim-bufdir"
+  },
   ["vim-dirdiff"] = {
     loaded = true,
     path = "/home/lynch/.local/share/nvim.scratch/site/pack/packer/start/vim-dirdiff",
@@ -198,6 +213,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/lynch/.local/share/nvim.scratch/site/pack/packer/start/vim-fugitive",
     url = "https://github.com/tpope/vim-fugitive"
+  },
+  ["vim-glsl"] = {
+    loaded = true,
+    path = "/home/lynch/.local/share/nvim.scratch/site/pack/packer/start/vim-glsl",
+    url = "https://github.com/tikhomirov/vim-glsl"
   },
   ["vim-rzip"] = {
     loaded = true,

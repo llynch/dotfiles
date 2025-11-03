@@ -64,5 +64,6 @@ export FZF_CTRL_R_OPTS="
 # Print tree structure in the preview window
 export FZF_ALT_C_OPTS="--preview 'tree -C {}'"
 
-_fzf_setup_completion path ag git stat vimdiff
-_fzf_setup_completion dir tree zip
+#_fzf_setup_completion path ag git stat vimdiff
+#_fzf_setup_completion dir tree zip
+eval "$(fzf --bash)"

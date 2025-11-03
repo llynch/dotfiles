@@ -226,7 +226,7 @@ set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) re
 mode "$mode_system" {
     bindsym l exec --no-startup-id i3lock -c 000000, mode "default"
     bindsym e exec --no-startup-id i3-msg exit, mode "default"
-    bindsym s exec --no-startup-id i3-msg suspend, mode "default"
+    bindsym s exec --no-startup-id systemctl suspend && i3lock, mode "default"
     bindsym h exec --no-startup-id i3-msg hibernate, mode "default"
     bindsym Shift+r exec --no-startup-id sudo reboot, mode "default"
     bindsym Shift+s exec --no-startup-id sudo poweroff, mode "default"
