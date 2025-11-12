@@ -324,8 +324,13 @@ codejwt-decode() { jq -R 'split(".") |.[0:2] | map(@base64d) | map(fromjson)' <<
 
 # curl -sS https://starship.rs/install.sh | sh
 eval "$(starship init bash)"
-source ~/.bash.tmux-bash-completion
+#source ~/.bash.tmux-bash-completion
 
 # opencode
 export PATH=/home/lynch/.opencode/bin:$PATH
 export EDITOR=nvim
+
+source .bashrc.d/bashrc-omarchy
+export PATH="$PATH:/home/lynch/github/llynch/git.fzf"
+
+

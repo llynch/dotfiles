@@ -63,7 +63,7 @@ return require('packer').startup(function(use)
 
   use { "tikhomirov/vim-glsl" }
 
-  -- use { '3rd/image.nvim', rocks = { 'magick' } }
+  use { '3rd/image.nvim', rocks = { 'magick' } }
   use { 'samjwill/vim-bufdir' }
   use { 'github/copilot.vim' }
   -- use { "zbirenbaum/copilot.lua" }
