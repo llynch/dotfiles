@@ -332,5 +332,6 @@ export EDITOR=nvim
 
 source .bashrc.d/bashrc-omarchy
 export PATH="$PATH:/home/lynch/github/llynch/git.fzf"
+export PATH="$PATH:/home/lynch/.bin"
 
 
