@@ -1,5 +1,8 @@
 local telescope = require('telescope')
+local plenary = require('plenary')
+
 local CD_HISTORY_DIR = vim.fn.getenv "CD_HISTORY_DIR"
+local NOTES_DIR = vim.fn.getenv "NOTES_DIR"
 
 local cdh = {}
 if (CD_HISTORY_DIR ~= nil) then
@@ -16,6 +19,53 @@ local function prompt_strip_spaces(prompt)
     new_prompt.prompt = prompt:gsub(" ", "")
     return new_prompt
 end
+
+function read_file(filepath)
+    local job_opts = {
+        command = "cat",
+        args = { vim.fn.expand(filepath) }
+    }
+    return cdh._job(job_opts)
+end
+
+local function cdh_c()
+    cdh.c({
+        on_input_filter_cb = prompt_strip_spaces
+    })
+end
+
+function notes_job()
+    local job_opts = {
+        command = "find",
+        args = { vim.fn.expand("~/notes/"), "-type", "f" }
+    }
+    local job = plenary.job:new(job_opts):sync()
+    return job
+end
+
+function notes()
+    cdh.c({
+        on_input_filter_cb = prompt_strip_spaces,
+        finder_fn = notes_job
+    })
+end
+
+function favorites_job()
+    local job_opts = {
+        command = "cat",
+        args = { vim.fn.expand("~/.favorites") }
+    }
+    local job = plenary.job:new(job_opts):sync()
+    return job
+end
+
+function favorites()
+    cdh.c({
+        on_input_filter_cb = prompt_strip_spaces,
+        finder_fn = favorites_job
+    })
+end
+
 
 telescope.setup({
     defaults = {
@@ -72,13 +122,11 @@ vim.keymap.set('n', '<leader><leader>f', builtin.resume, {desc = "Resume Last Te
 vim.keymap.set('n', '<leader>fs', builtin.treesitter, {desc = "Treesitter Symbols"})
 vim.keymap.set('n', '<leader>ft', builtin.tags, { desc = "Tags" })
 vim.keymap.set('n', '<leader>fw', builtin.live_grep, { desc = "Live Grep" })
-local function cdh_c()
-    cdh.c({
-        on_input_filter_cb = prompt_strip_spaces
-    })
-end
 vim.keymap.set('n', '<leader>c', cdh_c, { desc = "CD History" })
 vim.keymap.set('n', '<leader>fc', cdh_c, { desc = "CD History" })
+vim.keymap.set('n', '<leader>fn', notes, { desc = "Browse Notes" })
+vim.keymap.set('n', '<leader>fv', favorites, { desc = "Browse Favorites" })
+
 
 local colors = require("catppuccin.palettes").get_palette()
 local TelescopeColor = {

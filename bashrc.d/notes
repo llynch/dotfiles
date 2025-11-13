@@ -1,0 +1,2 @@
+export NOTES_DIR=$HOME/notes
+alias n='nvim $(find $NOTES_DIR -type f | fzf -m)'

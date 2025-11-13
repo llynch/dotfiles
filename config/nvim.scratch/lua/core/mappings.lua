@@ -21,7 +21,7 @@ vim.keymap.set('n', '<leader>w', '<cmd>write<CR>', { desc = "Save the current fi
 vim.keymap.set('n', '<leader>s', '<cmd>w<CR><cmd>source %<CR>', { desc = "Source the current file" })
 vim.keymap.set("n", "<leader>yy", '<cmd>let @*=expand("%")."\\n"<CR>', { desc = "Copy filename to the clipboard" })
 vim.keymap.set("n", "<leader>yl", '<cmd>let @*=expand("%").":".line(".")."\\n"<CR>', { desc = "Copy filename with line number to the clipboard" })
-vim.keymap.set("n", "P", 'o<Esc>p', { desc = "Paste on a inserted line" })
+-- vim.keymap.set("n", "P", 'o<Esc>p', { desc = "Paste on a inserted line" })
 
 -- checkbox toggles
 vim.keymap.set("n", "t", toggle_checkbox, { desc = "Toggle all checkboxes to checked" })
